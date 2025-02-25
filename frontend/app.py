@@ -12,13 +12,14 @@ train_df = pd.read_csv("backend/dataset/train.csv")
 # Streamlit UI Improvements
 st.set_page_config(page_title="Titanic Dataset Chatbot", layout="wide")
 
-# Custom Styling
+# Custom Styling for Better UI
 st.markdown("""
     <style>
-        .main {background-color: #f4f4f4;}
-        .stTextInput {border-radius: 10px;}
+        .main {background-color: #f0f2f6; padding: 20px;}
+        .stTextInput input {border-radius: 10px; border: 1px solid #ccc; padding: 10px;}
         .stButton > button {border-radius: 10px; font-size: 16px; background-color: #ff4b4b; color: white;}
         .stMarkdown {font-size: 18px; font-weight: bold;}
+        .chatbox {background-color: white; padding: 15px; border-radius: 10px; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);}
     </style>
 """, unsafe_allow_html=True)
 
@@ -44,16 +45,22 @@ if st.button("Ask Chatbot"):
     if question.strip():
         response = requests.post("http://127.0.0.1:8000/query", json={"question": question})
         data = response.json()
-        st.success("🤖 Chatbot: " + data["response"])
+        
+        # Ensure data['response'] is a string or properly formatted dictionary
+        if isinstance(data["response"], dict):
+            formatted_response = "\n".join([f"{key}: {value}" for key, value in data["response"].items()])
+            st.success(f"🤖 Chatbot Response:\n{formatted_response}")
+        else:
+            st.success(f"🤖 Chatbot: {data['response']}")
     else:
         st.warning("Please enter a valid question!")
 
-# Visualization Options
+# Sidebar - Visualization Options
 st.sidebar.header("📊 Visualization Options")
 viz_options = ["Histogram of Passenger Ages", "Survival Rate by Class", "Embarkation Count", "Random Fun Fact"]
 selected_viz = st.sidebar.radio("Choose a Visualization:", viz_options)
 
-fig, ax = plt.subplots(figsize=(6, 4))
+fig, ax = plt.subplots(figsize=(6, 3))
 
 if selected_viz == "Histogram of Passenger Ages":
     st.subheader("📌 Histogram of Passenger Ages")

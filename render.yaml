@@ -1,24 +1,21 @@
 services:
   - name: titanic-backend
     type: web
-    env: python
-    runtime: docker
-    repo: https://github.com/DivSingh77/AI_Chat_Assistant
-    branch: main
-    rootDir: backend
-    plan: free
-    envVars:
-      - key: PORT
-        value: 8000
+    runtime: python
+    rootDirectory: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 8000
 
   - name: titanic-frontend
     type: web
-    env: python
-    runtime: docker
-    repo: https://github.com/DivSingh77/AI_Chat_Assistant
-    branch: main
-    rootDir: frontend
-    plan: free
-    envVars:
-      - key: PORT
-        value: 8501
+    runtime: python
+    rootDirectory: frontend
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+
+  - name: titanic-main
+    type: web
+    runtime: python
+    rootDirectory: .
+    buildCommand: pip install -r requirements.txt
+    startCommand: python run.py

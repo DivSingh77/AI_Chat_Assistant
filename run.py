@@ -2,6 +2,7 @@ import subprocess
 import sys
 import time
 import webbrowser
+import os
 
 
 # Function to start the FastAPI backend
@@ -13,8 +14,8 @@ def start_backend():
 # Function to start the Streamlit frontend
 def start_frontend():
     print("Starting Streamlit frontend...")
-    time.sleep(3)  # Wait for backend to start
-    frontend_process = subprocess.Popen([sys.executable, "-m", "streamlit", "run", "frontend/app.py"])
+    time.sleep(5)  # Wait for backend to start
+    frontend_process = subprocess.Popen([sys.executable, "-m", "streamlit", "run", "frontend/app.py", "--server.port=8501", "--server.address=0.0.0.0"])
     return frontend_process
 
 if __name__ == "__main__":
@@ -22,8 +23,11 @@ if __name__ == "__main__":
     time.sleep(5)  # Ensure backend is up before frontend starts
     frontend_process = start_frontend()
     
+    # Get the frontend URL from environment variable or default to localhost
+    FRONTEND_URL = os.getenv("FRONTEND_URL", "https://titanic-app-3yey.onrender.com/")
+    
     # Open Streamlit app in browser
-    webbrowser.open("http://localhost:8501")
+    webbrowser.open(FRONTEND_URL)
 
     try:
         backend_process.wait()

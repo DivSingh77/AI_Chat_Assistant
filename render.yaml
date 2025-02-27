@@ -5,7 +5,7 @@ services:
     runtime: docker
     repo: https://github.com/DivSingh77/AI_Chat_Assistant
     branch: main
-    rootDir: backend/main.py
+    rootDir: backend
     plan: free
     envVars:
       - key: PORT
@@ -17,7 +17,7 @@ services:
     runtime: docker
     repo: https://github.com/DivSingh77/AI_Chat_Assistant
     branch: main
-    rootDir: frontend/app.py
+    rootDir: frontend
     plan: free
     envVars:
       - key: PORT

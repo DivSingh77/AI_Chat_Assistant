@@ -5,7 +5,7 @@ services:
     runtime: docker
     repo: https://github.com/DivSingh77/AI_Chat_Assistant
     branch: main
-    rootDir: backend
+    rootDir: backend/main.py
     plan: free
     envVars:
       - key: PORT
@@ -15,9 +15,9 @@ services:
     type: web
     env: python
     runtime: docker
-    repo: https://github.com/yourusername/titanic_chatbot
+    repo: https://github.com/DivSingh77/AI_Chat_Assistant
     branch: main
-    rootDir: frontend
+    rootDir: frontend/app.py
     plan: free
     envVars:
       - key: PORT

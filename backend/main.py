@@ -45,3 +45,7 @@ async def query_data(request: QueryRequest):
     
     else:
         return {"response": "🤖 Sorry, I don't have an answer for that. Try rephrasing!"}
+
+@app.get("/")
+async def read_root():
+    return {"message": "Welcome to the Titanic Dataset Chatbot API!"}

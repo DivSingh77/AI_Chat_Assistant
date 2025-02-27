@@ -22,7 +22,7 @@
 
 
 services:
-  - name: titanic-main
+  - name: titanic-app
     type: web
     runtime: python
     rootDirectory: .

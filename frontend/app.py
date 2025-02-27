@@ -1,5 +1,5 @@
+import os
 import random
-
 import matplotlib.pyplot as plt
 import pandas as pd
 import requests
@@ -41,9 +41,12 @@ selected_question = st.selectbox("💡 Suggested Questions", ["Select a question
 # User Input
 question = st.text_input("Type your own question:", value=selected_question if selected_question != "Select a question..." else "")
 
+# Get the backend URL from environment variable
+BACKEND_URL = os.getenv("BACKEND_URL", "http://127.0.0.1:8000/query")  # Default to local if not set
+
 if st.button("Ask Chatbot"):
     if question.strip():
-        response = requests.post("http://127.0.0.1:8000/query", json={"question": question})
+        response = requests.post(BACKEND_URL, json={"question": question})
         data = response.json()
         
         # Ensure data['response'] is a string or properly formatted dictionary

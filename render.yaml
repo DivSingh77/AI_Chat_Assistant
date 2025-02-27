@@ -3,7 +3,7 @@ services:
     type: web
     env: python
     runtime: docker
-    repo: https://github.com/yourusername/titanic_chatbot
+    repo: https://github.com/DivSingh77/AI_Chat_Assistant
     branch: main
     rootDir: backend
     plan: free

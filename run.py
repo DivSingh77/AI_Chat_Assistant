@@ -24,7 +24,7 @@ if __name__ == "__main__":
     frontend_process = start_frontend()
     
     # Get the frontend URL from environment variable or default to localhost
-    FRONTEND_URL = os.getenv("FRONTEND_URL", "https://titanic-app-3yey.onrender.com/")
+    FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:8501")
     
     # Open Streamlit app in browser
     webbrowser.open(FRONTEND_URL)

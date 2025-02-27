@@ -1,0 +1,24 @@
+services:
+  - name: titanic-backend
+    type: web
+    env: python
+    runtime: docker
+    repo: https://github.com/yourusername/titanic_chatbot
+    branch: main
+    rootDir: backend
+    plan: free
+    envVars:
+      - key: PORT
+        value: 8000
+
+  - name: titanic-frontend
+    type: web
+    env: python
+    runtime: docker
+    repo: https://github.com/yourusername/titanic_chatbot
+    branch: main
+    rootDir: frontend
+    plan: free
+    envVars:
+      - key: PORT
+        value: 8501
